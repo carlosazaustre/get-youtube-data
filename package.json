@@ -1,0 +1,18 @@
+{
+	"name": "get-youtube-data",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "node --test",
+		"start": "node --env-file=.env index.mjs"
+	},
+	"keywords": [],
+	"author": "Carlos Azaustre <cazaustre@gmail.com> (https://youtube.com/carlosazaustre)",
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^1.6.1",
+		"fs": "^0.0.1-security"
+	}
+}
