@@ -25,7 +25,7 @@ async function getVideos(pageToken) {
  *
  * @param {Array} videos - An array of YouTube video objects.
  */
-export function saveVideos(videos) {
+function parseDataVideos(videos) {
 	console.log("📦 Parsing data...");
 	const formattedVideos = videos.map((item) => {
 		return {
@@ -37,6 +37,10 @@ export function saveVideos(videos) {
 		};
 	});
 
+	return formattedVideos;
+}
+
+function saveVideos(formattedVideos) {
 	console.log("💾 Saving data...");
 	fs.writeFileSync("videos.json", JSON.stringify(formattedVideos, null, 2));
 }
@@ -44,12 +48,13 @@ export function saveVideos(videos) {
 async function getAllVideos() {
 	let videos = [];
 	let nextPageToken;
+	let i = 0;
 
 	console.log("🚀 Fetching videos...");
 	do {
 		const data = await getVideos(nextPageToken);
 
-		videos = [videos, ...data.items];
+		videos = videos.concat(parseDataVideos(data.items));
 		nextPageToken = data.nextPageToken;
 	} while (nextPageToken);
 
